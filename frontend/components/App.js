@@ -6,9 +6,10 @@ function App() {
   return (
     <div id="app">
       <nav>
-        {/* NavLinks here */}
+        <a class="active" href="/W_S7_Challenge">Home</a>
+        <a class="" href="/W_S7_Challenge/order" aria-current="page">Order</a>
       </nav>
-      {/* Route and Routes here */}
+      
       <Home />
       <Form />
     </div>
