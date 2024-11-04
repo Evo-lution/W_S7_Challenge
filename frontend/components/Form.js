@@ -18,12 +18,17 @@ const toppings = [
   { topping_id: '5', text: 'Ham' },
 ]
 
+// const [serverFailure, setServerFailure] = useState()
+// const [serverSuccess, setServerSuccess] = useState()
+// setServerSuccess()
+// setServerFailure()
+
 export default function Form() {
   return (
     <form>
       <h2>Order Your Pizza</h2>
-      {true && <div className='success'>Thank you for your order!</div>}
-      {true && <div className='failure'>Something went wrong</div>}
+      {/* { serverSuccess && <div className='success'>Thank you for your order!</div>}
+      { serverFailure && <div className='failure'>Something went wrong</div>} */}
 
       <div className="input-group">
         <div>
@@ -51,6 +56,14 @@ export default function Form() {
             name="Pepperoni"
             type="checkbox"
           />
+          {toppings.map((int) => (
+          <label key={int}>
+            <input
+            name={toppings.text}
+            type="checkbox"
+          />
+          </label>
+        ))}
           Pepperoni<br />
         </label>
       </div>
