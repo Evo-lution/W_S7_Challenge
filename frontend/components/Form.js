@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // 👇 Here are the validation errors you will use with Yup.
 const validationErrors = {
@@ -18,17 +18,21 @@ const toppings = [
   { topping_id: '5', text: 'Ham' },
 ]
 
-// const [serverFailure, setServerFailure] = useState()
-// const [serverSuccess, setServerSuccess] = useState()
-// setServerSuccess()
-// setServerFailure()
+const pizzasize = [
+  { pizzasize_id: 'S', text: 'Small' },
+  { pizzasize_id: 'M', text: 'Medium' },
+  { pizzasize_id: 'L', text: 'Large' },
+]
+
+//const [serverSuccess, setServerSuccess] = useState(false) 
+//setServerSuccess(false)
 
 export default function Form() {
   return (
     <form>
       <h2>Order Your Pizza</h2>
-      {/* { serverSuccess && <div className='success'>Thank you for your order!</div>}
-      { serverFailure && <div className='failure'>Something went wrong</div>} */}
+      { true && <div className='success'>Thank you for your order!</div> }
+      { !true && <div className='failure'>Something went wrong</div>} 
 
       <div className="input-group">
         <div>
@@ -43,29 +47,24 @@ export default function Form() {
           <label htmlFor="size">Size</label><br />
           <select id="size">
             <option value="">----Choose Size----</option>
-            {/* Fill out the missing options */}
+            {  
+              pizzasize.map((list)=> (
+                <option key={list.pizzasize_id} value={list.pizzasize_id}>{list.text}</option>
+              ))
+            }
           </select>
         </div>
         {true && <div className='error'>Bad value</div>}
       </div>
 
       <div className="input-group">
-        {/* 👇 Maybe you could generate the checkboxes dynamically */}
-        <label key="1">
-          <input
-            name="Pepperoni"
-            type="checkbox"
-          />
-          {toppings.map((int) => (
-          <label key={int}>
-            <input
-            name={toppings.text}
-            type="checkbox"
-          />
+      {
+        toppings.map((list)=> (
+          <label key={list.topping_id}>
+            <input name={list.text} type="checkbox" />{list.text}<br />
           </label>
-        ))}
-          Pepperoni<br />
-        </label>
+          ))
+        }
       </div>
       {/* 👇 Make sure the submit stays disabled until the form validates! */}
       <input type="submit" />
