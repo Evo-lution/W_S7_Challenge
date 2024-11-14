@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 // 👇 Here are the validation errors you will use with Yup.
 const validationErrors = {
@@ -6,7 +7,9 @@ const validationErrors = {
   fullNameTooLong: 'full name must be at most 20 characters',
   sizeIncorrect: 'size must be S or M or L'
 }
+
 // 👇 Here you will create your schema.
+
 // 👇 This array could help you construct your checkboxes using .map in the JSX.
 const toppings = [
   { topping_id: '1', text: 'Pepperoni' },
@@ -23,30 +26,55 @@ const pizzasize = [
 ]
 
 export default function Form() {
-  const [validationErrors, setValidationErrors] = useState(false)
-  const [formReadyForSubmit, setFormReadyForSubmit] = useState(false)
   const [fullname, setFullname] = useState("");
-  const [pizzaSizeSelection, setPizzaSize] = useState("X")
+  const [nameValid, setNameValid] = useState(false)
+  const [formSubmitSuccess, setFormSubmitSuccess] = useState(false)
+  const [formSubmitFailure, setFormSubmitFailure] = useState(false)
+  const [pizzaSizeSelection, setPizzaSize] = useState("")
+  const [pizzaSizeValid, setpizzaSizeValid] = useState(false)
+  const [readyRun, setreadyRun] = useState(false)
 
-function handleSubmitClick()
+// function handleSubmitClick()
+const handleSubmitClick = async () => {
 
-{
-  //useEffect(() => { setFormSubmitted(true) }, false)
+  event.preventDefault();
+
+// call endpoint using axios
+if (readyRun != true) {
+  return
 }
+// if success then
+//useEffect(() => { setFormSubmitSuccess(true) }, false);
+//useEffect(() => { setFormSubmitFailure(false) }, true);  
 
+// if fail then
+//useEffect(() => { setFormSubmitFailure(true) }, false);
+//useEffect(() => { setFormSubmitSuccess(false) }, true);  
 
+const {data} = await axios.post('http://localhost:9009/api/order', {
+  fullName: 'Fred',
+  size: 'S',
+  toppings: [1, 2],
+}, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+}
+)
+
+}
 
 function IsFullNameValid(props) {
   const fullnameLength = props.fullnameLength;
   if (fullnameLength > 20) {
-    setValidationErrors(true);
-    return <div className='error'>{validationErrors.fullNameTooLong}654</div>;
+    setNameValid(false);
+    return <div className='error'>{validationErrors.fullNameTooLong}</div>;
   }  
-
   if (fullnameLength > 0 && fullnameLength < 3) {
-    setValidationErrors(true);
-    return <div className='error'>{validationErrors.fullNameTooShort}123</div>;
+    setNameValid(false);
+    return <div className='error'>{validationErrors.fullNameTooShort}</div>;
   }
+  setNameValid(true);
   return "";
 }
 
@@ -54,19 +82,20 @@ function IsPizzaSizeValid(props) {
   const pizzaSize = props.pizzaSizeSelection;
   if(pizzaSize === 'X') {
     setPizzaSize(pizzaSize);
-    return <div className='error'>{validationErrors.sizeIncorrect}booh!</div>;
+    setpizzaSizeValid(false);
+    return <div className='error'>{validationErrors.sizeIncorrect}</div>;
   }
   setPizzaSize(pizzaSize);
-  return <div className='error'>yeah!</div>;
+  setpizzaSizeValid(true);
+  return <div></div>;
 }
 
   return (
-    <form method='post' action='www.programiz.com/user'>
-
+    <form method='post'>
       <h2>Order Your Pizza</h2>
-
-      {!validationErrors && formReadyForSubmit && <div className='success'>Thank you for your order!</div>}
-      {validationErrors && formReadyForSubmit && <div className='failure'>Something went wrong</div>}
+      
+      {formSubmitSuccess && <div className='success'>Thank you for your order!</div>}
+      {formSubmitFailure && <div className='failure'>Something went wrong</div>}
 
       <div className="input-group">
         <div>
@@ -92,16 +121,15 @@ function IsPizzaSizeValid(props) {
       <div className="input-group">
         {
           toppings.map((list)=> (
-            <label key={list.topping_id}>
+            <label for="topping"  key={list.topping_id}>
               <input name={list.text} id={list.text} type="checkbox" />{list.text}<br />
             </label>
           ))
         }
       </div>
 
-      {fullname.length} {pizzaSizeSelection}
-
-      <input disabled={ (fullname.length > 2 && fullname.length < 20) ? false : true } type="submit" onClick={handleSubmitClick()}/>
+      <input disabled={ (nameValid && pizzaSizeValid && fullname.length > 0 && pizzaSizeSelection !== '') ? false : true } type="submit" onClick="handleSubmitClick()"/>
+      
     </form>
   )
 }
