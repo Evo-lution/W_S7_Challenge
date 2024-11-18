@@ -1,20 +1,19 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
 import Home from './Home'
-import Form from './Form'
-
-
+import Order from './Order'
+import { Link } from "react-router-dom";
 
 function App() {
   return (
     <div id="app">     
       <nav>
-        <a aria-current="page" className="active" href="/">Home</a>
-        <a className="" href="/Form">Order</a>
+        <Link to="/">Home</Link>
+        <Link to="/order">Order</Link>
       </nav>
         <Routes> 
           <Route path="/" element={<Home />} />
-          <Route path="/Form" element={<Form/>} />
+          <Route path="/order" element={<Order/>} />
         </Routes>
     </div>
   )
