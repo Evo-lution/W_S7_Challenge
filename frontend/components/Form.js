@@ -7,7 +7,7 @@ const validationErrors = {
   fullNameTooLong: 'full name must be at most 20 characters',
   sizeIncorrect: 'size must be S or M or L'
 }
-
+// typing this here just to get it to register my new commit
 // 👇 Here you will create your schema.
 
 // 👇 This array could help you construct your checkboxes using .map in the JSX.

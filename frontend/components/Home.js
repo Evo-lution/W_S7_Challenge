@@ -1,7 +1,7 @@
 import React from 'react'
 import pizza from './images/pizza.jpg'
 import { Link } from "react-router-dom";
-
+// typing this here just to get it to register my new commit
 function Home() {
   return (
     <div>

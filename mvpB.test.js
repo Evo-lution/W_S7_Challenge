@@ -13,6 +13,7 @@ describe('Sprint 7 Challenge Learner Tests', () => {
     [3] sum(1, 3) // returns 4
     [4] sum('1', 2) // returns 3
     [5] sum('10', '3') // returns 13
+    typing this here just to get it to register my new commit
   */
     describe('TASK 1 - Unit Testing of sum function', () => {
       test('[1] sum() throws an error "pass valid numbers"', () => {
