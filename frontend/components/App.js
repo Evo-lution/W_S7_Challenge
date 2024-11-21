@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
 import Home from './Home'
-import Order from './Order'
+import Order from './Form'
 import { Link } from "react-router-dom";
 
 function App() {
