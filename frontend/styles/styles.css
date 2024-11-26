@@ -112,3 +112,19 @@ a {
 a.active {
   color: #ff4b00;
 }
+
+#fullName {
+  margin: 0;
+}
+
+#size {
+  margin: 0;
+}
+
+.fullName {
+  margin: 0;
+}
+
+.size {
+  margin: 0;
+}
